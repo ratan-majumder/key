@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-<meta charset="UTF-8" />
-<title>Ratan Panel UI</title>
+<meta charset="utf-8" />
+<title>Ratan Panel UI - Main</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <style>
 body {
     margin: 0;
@@ -13,96 +12,30 @@ body {
     font-family: Arial, sans-serif;
     overflow-x: hidden;
 }
-
 #particles {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-size: cover;
-    background-image: url('https://i.ibb.co/2j6JfYF/particles.gif');
-    opacity: 0.15;
+    position: fixed; width:100%; height:100%; z-index:-1;
+    background-size: cover; background-image: url('https://i.ibb.co/2j6JfYF/particles.gif'); opacity:0.15;
 }
+.container { width:90%; max-width:500px; margin:auto; text-align:center; padding-top:40px; }
+h2 { font-size:28px; margin-bottom:25px; text-shadow:0 0 15px #00eaff; }
+.btn { width:100%; padding:15px; margin-top:12px; border:none; border-radius:12px; font-size:18px; font-weight:bold; cursor:pointer; background:#111; color:#00eaff; box-shadow:0 0 10px #00eaff; transition:.3s; }
+.btn:hover { transform:scale(1.05); background:#00eaff; color:#000; box-shadow:0 0 20px #00eaff; }
+.footer { margin-top:30px; opacity:0.7; font-size:14px; }
+.key-box { margin-top:20px; padding:15px; background:#0f0f0f; border-radius:10px; border:1px solid #00eaff; display:none; }
+.key-text { font-size:20px; font-weight:bold; color:#00eaff; word-break:break-all; }
+.copy-btn { margin-top:10px; padding:10px; background:#00eaff; color:black; border:none; border-radius:8px; font-weight:bold; cursor:pointer; }
 
-.container {
-    width: 90%;
-    max-width: 500px;
-    margin: auto;
-    text-align: center;
-    padding-top: 40px;
-}
-
-h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 25px;
-    text-shadow: 0 0 15px #00eaff, 0 0 25px #00eaff;
-    animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-    0% { text-shadow: 0 0 5px #00eaff, 0 0 10px #00eaff; }
-    100% { text-shadow: 0 0 15px #00eaff, 0 0 25px #00eaff; }
-}
-
-.btn {
-    width: 100%;
-    padding: 15px;
-    margin-top: 12px;
-    border: none;
-    border-radius: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    background: #111;
-    color: #00eaff;
-    box-shadow: 0 0 10px #00eaff;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    transform: scale(1.05);
-    background: #00eaff;
-    color: #000;
-    box-shadow: 0 0 20px #00eaff, 0 0 40px #00eaff;
-}
-
-.footer {
-    margin-top: 30px;
-    opacity: 0.7;
-    font-size: 14px;
-}
-
-.key-box {
-    margin-top: 20px;
-    padding: 15px;
-    background: #0f0f0f;
-    border-radius: 10px;
-    border: 1px solid #00eaff;
-    display: none;
-}
-
-.key-text {
-    font-size: 20px;
-    font-weight: bold;
-    color: #00eaff;
-    word-break: break-all;
-}
-
-.copy-btn {
-    margin-top: 10px;
-    padding: 10px;
-    background: #00eaff;
-    color: black;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-}
+/* Login modal */
+.modal-back { position: fixed; inset:0; background: rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:50; }
+.modal { width:320px; background:#0b0b0b; padding:20px; border-radius:12px; box-shadow:0 0 20px #00eaff; }
+.modal h3 { margin:0 0 10px 0; text-shadow:0 0 8px #00eaff; }
+.modal input { width:100%; padding:10px; margin:8px 0; border-radius:8px; border:none; font-size:15px; }
+.small { font-size:13px; opacity:0.8; margin-top:8px; }
+.logout { margin-top:12px; padding:8px 12px; background:#ff4d4d; border:none; color:white; border-radius:8px; cursor:pointer; }
+.info { margin-top:15px; font-size:15px; color:#00ffcc; text-align:left; background:#111; padding:10px; border-radius:10px; }
 </style>
 </head>
 <body>
-
 <div id="particles"></div>
 
 <div class="container">
@@ -119,21 +52,32 @@ h2 {
     <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')">🛒 Buy Panel (Create Ticket)</button>
 
     <!-- Only Get Key -->
-    <button class="btn" onclick="getKey()">🔑 Get Key</button>
+    <button class="btn" id="getKeyBtn" onclick="getKey()">🔑 Key নিন</button>
 
     <div id="keyBox" class="key-box">
         <div class="key-text" id="displayKey"></div>
-        <button class="copy-btn" onclick="copyKey()">Copy</button>
+        <button class="copy-btn" onclick="copyKey()">Copy করুন</button>
     </div>
 
     <p class="footer">© Ratan – Panel System</p>
+    <div id="userInfo" class="info" style="display:none"></div>
+</div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal-back" style="display:none">
+    <div class="modal">
+        <h3>Ratan-এ লগইন করুন</h3>
+        <input id="loginUser" placeholder="Username (নাম)">
+        <input id="loginPass" placeholder="Password" type="password">
+        <button class="btn" style="width:100%; margin-top:6px;" onclick="doLogin()">লগইন</button>
+        <div class="small">আপনার একাউন্ট নেই? অ্যাডমিনের সাথে যোগাযোগ করুন।</div>
+    </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, get, update, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-/* Firebase Config */
 const firebaseConfig = {
   apiKey: "AIzaSyBOcA7LyCU-zNlVj13DQcZKD-ImdD7paOI",
   authDomain: "balh-1d419.firebaseapp.com",
@@ -144,58 +88,149 @@ const firebaseConfig = {
   appId: "1:1036597182312:web:749f9d6c30f200720f60dd",
   measurementId: "G-S2LZZ28SYN"
 };
-
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-/* Get Key System */
-window.getKey = async function () {
-    const name = prompt("আপনার নাম লিখুন:");
-    const number = prompt("WhatsApp নম্বর (country code সহ, যেমন 8801xxxxxx):");
-    if(!name || !number){ alert("Name & Number required!"); return; }
+let currentUserId = null;
+let currentSession = null;
+const loginModal = document.getElementById('loginModal');
+const userInfoDiv = document.getElementById('userInfo');
 
-    // IP
-    let userIP = 'unknown';
-    try{ userIP = (await fetch('https://api64.ipify.org?format=json').then(r=>r.json())).ip; } catch(e){ console.warn(e); }
+function showLogin(){ loginModal.style.display="flex"; }
+function hideLogin(){ loginModal.style.display="none"; }
 
-    // Location
-    const location = await new Promise(resolve=>{
-        if(!navigator.geolocation) return resolve(null);
-        navigator.geolocation.getCurrentPosition(pos=>resolve({lat: pos.coords.latitude, lon: pos.coords.longitude}), ()=>resolve(null));
+window.addEventListener('load', async ()=>{
+    const session = localStorage.getItem('ratan_session');
+    const uid = localStorage.getItem('ratan_userid');
+    if(session && uid){
+        const snap = await get(ref(db, 'users/' + uid));
+        if(!snap.exists()){ logoutLocal(); showLogin(); return; }
+        const user = snap.val();
+        if(user.activeSession && user.activeSession === session){
+            currentUserId = uid; currentSession = session;
+            initAfterLogin(user);
+            onValue(ref(db, 'users/' + uid + '/activeSession'), s=>{
+                const val = s.val() || "";
+                if(val !== currentSession){ alert('Session expired বা অন্য ডিভাইসে লগইন হয়েছে।'); logoutLocal(); location.reload(); }
+            });
+            return;
+        } else { logoutLocal(); showLogin(); return; }
+    } else { showLogin(); }
+});
+
+function genSession(){ return Math.random().toString(36).substring(2)+Date.now().toString(36); }
+
+window.doLogin = async function(){
+    const username=document.getElementById('loginUser').value.trim();
+    const password=document.getElementById('loginPass').value.trim();
+    if(!username || !password) return alert('দয়া করে সব তথ্য পূরণ করুন।');
+
+    const snap=await get(ref(db,'users'));
+    if(!snap.exists()) return alert('কোনো ব্যবহারকারী পাওয়া যায়নি। অ্যাডমিনের সাথে যোগাযোগ করুন।');
+    const data=snap.val();
+    let foundId=null, foundUser=null;
+    for(const id in data){ if(data[id].username===username && data[id].password===password){ foundId=id; foundUser=data[id]; break; } }
+    if(!foundId) return alert('ভুল নাম/পাসওয়ার্ড');
+
+    if(foundUser.expiry){
+        const now=new Date(); const exp=new Date(foundUser.expiry);
+        if(!isNaN(exp.getTime()) && now>exp) return alert('আপনার একাউন্টের মেয়াদ শেষ হয়েছে।');
+    }
+    if(foundUser.activeSession && foundUser.activeSession!=="") return alert('এই একাউন্টটি অন্য ডিভাইসে লগইন আছে।');
+
+    const sessionId=genSession();
+    await update(ref(db,'users/'+foundId),{ activeSession: sessionId });
+    localStorage.setItem('ratan_session',sessionId);
+    localStorage.setItem('ratan_userid',foundId);
+    currentUserId=foundId; currentSession=sessionId;
+    hideLogin();
+    initAfterLogin(foundUser);
+    onValue(ref(db,'users/'+foundId+'/activeSession'),s=>{
+        const val=s.val()||"";
+        if(val!==currentSession){ alert('Session শেষ হয়েছে।'); logoutLocal(); location.reload(); }
     });
+};
 
-    // Get Key from Firebase
-    const allKeys = await get(ref(db,"keys"));
-    if(!allKeys.exists()){ alert("No key available!"); return; }
+async function logoutLocal(){
+    try{
+        const uid=localStorage.getItem('ratan_userid');
+        const sess=localStorage.getItem('ratan_session');
+        if(uid && sess){
+            const snap=await get(ref(db,'users/'+uid+'/activeSession'));
+            if(snap.exists() && snap.val()===sess){ await update(ref(db,'users/'+uid),{ activeSession:"" }); }
+        }
+    }catch(e){}
+    localStorage.removeItem('ratan_session'); localStorage.removeItem('ratan_userid');
+    currentUserId=null; currentSession=null;
+}
 
-    let data = allKeys.val();
-    let selectedKey = null;
-    for(let id in data){ if(data[id].used===0){ selectedKey={id,key:data[id].value}; break; } }
-    if(!selectedKey){ alert("No key left!"); return; }
+function initAfterLogin(user){
+    document.getElementById('getKeyBtn').disabled=false;
+    userInfoDiv.style.display='block';
+    let phoneDisplay = user.phone ? `\nWhatsApp: ${user.phone}` : '';
+    userInfoDiv.innerText=`লগইন: ${user.username}${phoneDisplay}\nব্যবহৃত Key: ${user.usedKeys || 0} / ${user.maxKeys || 0}`;
 
-    await update(ref(db,"keys/"+selectedKey.id),{
+    if(!document.getElementById('dynamicLogout')){
+        const btn=document.createElement('button');
+        btn.innerText='লগআউট';
+        btn.className='logout';
+        btn.id='dynamicLogout';
+        btn.onclick=async ()=>{ await logoutLocal(); location.reload(); };
+        document.querySelector('.container').appendChild(btn);
+    }
+}
+
+/* Key logic (মূল কোড আগের মতো) */
+window.getKey = async function(){
+    const uid=localStorage.getItem('ratan_userid');
+    const sess=localStorage.getItem('ratan_session');
+    if(!uid || !sess){ alert('প্রথমে লগইন করুন'); showLogin(); return; }
+
+    const userSnap=await get(ref(db,'users/'+uid));
+    if(!userSnap.exists()){ alert('ব্যবহারকারী পাওয়া যায়নি'); logoutLocal(); showLogin(); return; }
+    const user=userSnap.val();
+    if(user.activeSession!==sess){ alert('Session অকার্যকর'); logoutLocal(); showLogin(); return; }
+
+    const used=Number(user.usedKeys||0);
+    const max=Number(user.maxKeys||0);
+    if(max>0 && used>=max){ alert('আপনি আপনার key সীমা পূর্ণ করেছেন।'); return; }
+
+    let userIP='unknown';
+    try{ userIP=(await fetch('https://api64.ipify.org?format=json').then(r=>r.json())).ip; }catch(e){ console.warn(e); }
+
+    const keysSnap=await get(ref(db,'keys'));
+    if(!keysSnap.exists()) return alert('কোনো key পাওয়া যায়নি।');
+    const keys=keysSnap.val();
+    let selected=null, selectedId=null;
+    for(const id in keys){ if(keys[id].used===0 || keys[id].used==="0"){ selected=keys[id]; selectedId=id; break; } }
+    if(!selected) return alert('ফ্রি key নেই।');
+
+    await update(ref(db,'keys/'+selectedId),{
         used:1,
-        userName:name,
-        userNumber:number,
+        userName:user.username||'',
+        userNumber:user.phone||'',
         ip:userIP,
-        location: location,
         time:new Date().toLocaleString()
     });
 
-    document.getElementById("displayKey").innerText = selectedKey.key;
-    document.getElementById("keyBox").style.display = "block";
+    await update(ref(db,'users/'+uid),{ usedKeys:used+1 });
 
-    if(confirm("Key ready! Open WhatsApp to send?")){
-        window.open("https://wa.me/"+number+"?text="+encodeURIComponent("Your Key: "+selectedKey.key));
+    document.getElementById('displayKey').innerText=selected.value;
+    document.getElementById('keyBox').style.display='block';
+    initAfterLogin(Object.assign(user,{usedKeys:used+1}));
+
+    if(confirm('Key তৈরি হয়েছে! WhatsApp এ পাঠাবেন?')){
+        const number=prompt('প্রাপকের WhatsApp নম্বর (country code সহ):','8801');
+        if(number) window.open("https://wa.me/"+number+"?text="+encodeURIComponent("আপনার Key: "+selected.value));
     }
 };
 
-window.copyKey = function () {
-    const text = document.getElementById("displayKey").innerText;
-    if(!text){ alert("No key to copy"); return; }
-    navigator.clipboard.writeText(text).then(()=>alert("Copied!"));
+window.copyKey=function(){
+    const text=document.getElementById('displayKey').innerText;
+    if(!text) return alert('Key নেই'); navigator.clipboard.writeText(text).then(()=>alert('Copied!'));
 };
-</script>
 
+document.getElementById('getKeyBtn').disabled=true;
+</script>
 </body>
 </html>
