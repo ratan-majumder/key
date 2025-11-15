@@ -18,8 +18,62 @@ body {
 }
 .container { width:90%; max-width:500px; margin:auto; text-align:center; padding-top:40px; }
 h2 { font-size:28px; margin-bottom:25px; text-shadow:0 0 15px #00eaff; }
-.btn { width:100%; padding:15px; margin-top:12px; border:none; border-radius:12px; font-size:18px; font-weight:bold; cursor:pointer; background:#111; color:#00eaff; box-shadow:0 0 10px #00eaff; transition:.3s; }
-.btn:hover { transform:scale(1.05); background:#00eaff; color:#000; box-shadow:0 0 20px #00eaff; }
+.btn {
+    width:100%; padding:15px; margin-top:12px; border:none; border-radius:12px;
+    font-size:18px; font-weight:bold; cursor:pointer;
+    background:#111; color:#00eaff; box-shadow:0 0 10px #00eaff;
+    transition:.3s;
+    position: relative;
+    overflow: hidden;
+    user-select:none;
+    /* নতুন যোগ: হালকা glow ও transition */
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Shine effect wrapper span inside button */
+.btn > .shine-text {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* The shining overlay */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg);
+    transition: none;
+    pointer-events: none;
+}
+
+/* On hover: animate shine from left to right */
+.btn:hover::before {
+    left: 125%;
+    transition: left 0.7s ease;
+}
+
+/* On hover: invert colors a bit for clarity + subtle glow + scale up */
+.btn:hover {
+    background: #00eaff;
+    color: #000;
+    box-shadow: 0 0 15px #00eaff, 0 0 20px #00eaffaa; /* subtle glow */
+    transform: scale(1.05);
+}
+
+/* On hover: text glow and color change */
+.btn:hover > .shine-text {
+    color: #004d66; /* একটু গাঢ় নীল */
+    text-shadow:
+        0 0 6px #00eaff,
+        0 0 12px #00eaffaa;
+}
+
+/* Footer and other elements remain the same */
 .footer { margin-top:30px; opacity:0.7; font-size:14px; }
 .key-box { margin-top:20px; padding:15px; background:#0f0f0f; border-radius:10px; border:1px solid #00eaff; display:none; }
 .key-text { font-size:20px; font-weight:bold; color:#00eaff; word-break:break-all; }
@@ -39,38 +93,38 @@ h2 { font-size:28px; margin-bottom:25px; text-shadow:0 0 15px #00eaff; }
 <div id="particles"></div>
 
 <div class="container">
-    <h2>🔥 Ratan Panel UI 🔥</h2>
+    <h2>🎮 Ratan Panel – Safe Gaming Zone 🔥</h2>
 
-    <!-- Buttons -->
-    <button class="btn" onclick="window.open('https://discord.gg/q2G3k3HZXc')">💠 Hex Server Discord</button>
-    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')">💎 Basic Panel</button>
-    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')">🚀 Extreme Panel</button>
-    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')">🔥 Bypass Panel</button>
-    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')">😎 Emote Panel</button>
-    <button class="btn" onclick="window.open('https://www.youtube.com/@YOUTUBERJOY22/videos')">▶️ YouTube</button>
-    <button class="btn" onclick="window.open('https://discord.gg/q2G3k3HZXc')">🎧 Support Server</button>
-    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')">🛒 Buy Panel (Create Ticket)</button>
+    <!-- Buttons with shine-text span wrapping text -->
+    <button class="btn" onclick="window.open('https://discord.gg/q2G3k3HZXc')"><span class="shine-text">💠 Hex Server Discord (গেমারদের হাব)</span></button>
+    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">💎 Basic Panel – দ্রুত এবং নিরাপদ</span></button>
+    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">🚀 Extreme Panel – আপনার স্কিল বাড়ান</span></button>
+    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">🔥 Bypass Panel – গেমে অগ্রগতি সহজ</span></button>
+    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">😎 Emote Panel – মজা ও স্টাইল</span></button>
+    <button class="btn" onclick="window.open('https://www.youtube.com/@YOUTUBERJOY22/videos')"><span class="shine-text">▶️ YouTube – গেমিং ট্রিকস দেখুন</span></button>
+    <button class="btn" onclick="window.open('https://discord.gg/q2G3k3HZXc')"><span class="shine-text">🎧 Support Server – সব সময় পাশে</span></button>
+    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">🛒 Buy Panel (Create Ticket)</span></button>
 
     <!-- Only Get Key -->
-    <button class="btn" id="getKeyBtn" onclick="getKey()">🔑 Key নিন</button>
+    <button class="btn" id="getKeyBtn" onclick="getKey()"><span class="shine-text">🔑 Key নিন – নিরাপদ গেমিং</span></button>
 
     <div id="keyBox" class="key-box">
         <div class="key-text" id="displayKey"></div>
-        <button class="copy-btn" onclick="copyKey()">Copy করুন</button>
+        <button class="copy-btn" onclick="copyKey()">Copy করুন – দ্রুত ব্যবহার করুন</button>
     </div>
 
-    <p class="footer">© Ratan – Panel System</p>
+    <p class="footer">© Ratan – Safe Gaming Panel & Skill Boost</p>
     <div id="userInfo" class="info" style="display:none"></div>
 </div>
 
 <!-- Login Modal -->
 <div id="loginModal" class="modal-back" style="display:none">
     <div class="modal">
-        <h3>Ratan-এ লগইন করুন</h3>
+        <h3>🎮 Ratan-এ লগইন করুন</h3>
         <input id="loginUser" placeholder="Username (নাম)">
         <input id="loginPass" placeholder="Password" type="password">
-        <button class="btn" style="width:100%; margin-top:6px;" onclick="doLogin()">লগইন</button>
-        <div class="small">আপনার একাউন্ট নেই? অ্যাডমিনের সাথে যোগাযোগ করুন।</div>
+        <button class="btn" style="width:100%; margin-top:6px;" onclick="doLogin()">লগইন করুন</button>
+        <div class="small">একাউন্ট নেই? অ্যাডমিনের সাথে যোগাযোগ করুন।</div>
     </div>
 </div>
 
@@ -168,7 +222,7 @@ function initAfterLogin(user){
     document.getElementById('getKeyBtn').disabled=false;
     userInfoDiv.style.display='block';
     let phoneDisplay = user.phone ? `\nWhatsApp: ${user.phone}` : '';
-    userInfoDiv.innerText=`লগইন: ${user.username}${phoneDisplay}\nব্যবহৃত Key: ${user.usedKeys || 0} / ${user.maxKeys || 0}`;
+    userInfoDiv.innerText=`লগইন: ${user.username}${phoneDisplay}\nব্যবৃত্তি Key: ${user.usedKeys || 0} / ${user.maxKeys || 0}`;
 
     if(!document.getElementById('dynamicLogout')){
         const btn=document.createElement('button');
@@ -180,7 +234,7 @@ function initAfterLogin(user){
     }
 }
 
-/* Key logic (মূল কোড আগের মতো) */
+/* Key logic */
 window.getKey = async function(){
     const uid=localStorage.getItem('ratan_userid');
     const sess=localStorage.getItem('ratan_session');
