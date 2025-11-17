@@ -22,109 +22,71 @@ h2 { font-size:28px; margin-bottom:25px; text-shadow:0 0 15px #00eaff; }
     width:100%; padding:15px; margin-top:12px; border:none; border-radius:12px;
     font-size:18px; font-weight:bold; cursor:pointer;
     background:#111; color:#00eaff; box-shadow:0 0 10px #00eaff;
-    transition:.3s;
-    position: relative;
-    overflow: hidden;
-    user-select:none;
-    /* নতুন যোগ: হালকা glow ও transition */
+    position: relative; overflow: hidden; user-select:none;
     transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
-
-/* Shine effect wrapper span inside button */
-.btn > .shine-text {
-    position: relative;
-    z-index: 1;
-    display: inline-block;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-/* The shining overlay */
+.btn > .shine-text { position: relative; z-index:1; display:inline-block; transition: color 0.3s ease, text-shadow 0.3s ease; }
 .btn::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -75%;
-    width: 50%;
-    height: 100%;
+    content:''; position:absolute; top:0; left:-75%; width:50%; height:100%;
     background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
-    transform: skewX(-20deg);
-    transition: none;
-    pointer-events: none;
+    transform: skewX(-20deg); pointer-events:none;
 }
+.btn:hover::before { left:125%; transition:left 0.7s ease; }
+.btn:hover { background:#00eaff; color:#000; box-shadow:0 0 15px #00eaff,0 0 20px #00eaffaa; transform:scale(1.05);}
+.btn:hover > .shine-text { color:#004d66; text-shadow:0 0 6px #00eaff,0 0 12px #00eaffaa; }
 
-/* On hover: animate shine from left to right */
-.btn:hover::before {
-    left: 125%;
-    transition: left 0.7s ease;
-}
-
-/* On hover: invert colors a bit for clarity + subtle glow + scale up */
-.btn:hover {
-    background: #00eaff;
-    color: #000;
-    box-shadow: 0 0 15px #00eaff, 0 0 20px #00eaffaa; /* subtle glow */
-    transform: scale(1.05);
-}
-
-/* On hover: text glow and color change */
-.btn:hover > .shine-text {
-    color: #004d66; /* একটু গাঢ় নীল */
-    text-shadow:
-        0 0 6px #00eaff,
-        0 0 12px #00eaffaa;
-}
-
-/* Footer and other elements remain the same */
 .footer { margin-top:30px; opacity:0.7; font-size:14px; }
 .key-box { margin-top:20px; padding:15px; background:#0f0f0f; border-radius:10px; border:1px solid #00eaff; display:none; }
 .key-text { font-size:20px; font-weight:bold; color:#00eaff; word-break:break-all; }
 .copy-btn { margin-top:10px; padding:10px; background:#00eaff; color:black; border:none; border-radius:8px; font-weight:bold; cursor:pointer; }
 
-/* Login modal */
 .modal-back { position: fixed; inset:0; background: rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:50; }
 .modal { width:320px; background:#0b0b0b; padding:20px; border-radius:12px; box-shadow:0 0 20px #00eaff; }
 .modal h3 { margin:0 0 10px 0; text-shadow:0 0 8px #00eaff; }
 .modal input { width:100%; padding:10px; margin:8px 0; border-radius:8px; border:none; font-size:15px; }
 .small { font-size:13px; opacity:0.8; margin-top:8px; }
 .logout { margin-top:12px; padding:8px 12px; background:#ff4d4d; border:none; color:white; border-radius:8px; cursor:pointer; }
-.info { margin-top:15px; font-size:15px; color:#00ffcc; text-align:left; background:#111; padding:10px; border-radius:10px; }
+.info { margin-top:15px; font-size:15px; color:#00ffcc; text-align:left; background:#111; padding:10px; border-radius:10px; white-space: pre-line; }
+
+/* Admin FB Highlight */
+.admin-link { color:#00eaff; font-weight:bold; text-decoration:underline; }
+.admin-link:hover { color:#ffdd00; text-shadow:0 0 10px #ffdd00; }
 </style>
 </head>
 <body>
 <div id="particles"></div>
-
 <div class="container">
-    <h2>🎮 Ratan Panel – Safe Gaming Zone 🔥</h2>
+<h2>🎮 Ratan Panel – Safe Gaming Zone 🔥</h2>
 
-    <!-- Buttons with shine-text span wrapping text -->
-    <button class="btn" onclick="window.open('https://discord.gg/q2G3k3HZXc')"><span class="shine-text">💠 Hex Server Discord (গেমারদের হাব)</span></button>
-    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">💎 Basic Panel – দ্রুত এবং নিরাপদ</span></button>
-    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">🚀 Extreme Panel – আপনার স্কিল বাড়ান</span></button>
-    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">🔥 Bypass Panel – গেমে অগ্রগতি সহজ</span></button>
-    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">😎 Emote Panel – মজা ও স্টাইল</span></button>
-    <button class="btn" onclick="window.open('https://www.youtube.com/@YOUTUBERJOY22/videos')"><span class="shine-text">▶️ YouTube – গেমিং ট্রিকস দেখুন</span></button>
-    <button class="btn" onclick="window.open('https://discord.gg/q2G3k3HZXc')"><span class="shine-text">🎧 Support Server – সব সময় পাশে</span></button>
-    <button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">🛒 Buy Panel (Create Ticket)</span></button>
+<!-- Buttons -->
+<button class="btn" onclick="window.open('https://discord.gg/q2G3k3HZXc')"><span class="shine-text">💠 Hex Server Discord</span></button>
+<button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">💎 Basic Panel</span></button>
+<button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">🚀 Extreme Panel</span></button>
+<button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">🔥 Bypass Panel</span></button>
+<button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">😎 Emote Panel</span></button>
+<button class="btn" onclick="window.open('https://www.youtube.com/@YOUTUBERJOY22/videos')"><span class="shine-text">▶️ YouTube</span></button>
+<button class="btn" onclick="window.open('https://discord.gg/q2G3k3HZXc')"><span class="shine-text">🎧 Support Server</span></button>
+<button class="btn" onclick="window.open('https://discord.com/channels/1257974538939928596/1386731448022728725')"><span class="shine-text">🛒 Buy Panel</span></button>
 
-    <!-- Only Get Key -->
-    <button class="btn" id="getKeyBtn" onclick="getKey()"><span class="shine-text">🔑 Key নিন – নিরাপদ গেমিং</span></button>
+<button class="btn" id="getKeyBtn" onclick="getKey()"><span class="shine-text">🔑 Key নিন</span></button>
 
-    <div id="keyBox" class="key-box">
-        <div class="key-text" id="displayKey"></div>
-        <button class="copy-btn" onclick="copyKey()">Copy করুন – দ্রুত ব্যবহার করুন</button>
-    </div>
-
-    <p class="footer">© Ratan – Safe Gaming Panel & Skill Boost</p>
-    <div id="userInfo" class="info" style="display:none"></div>
+<div id="keyBox" class="key-box">
+    <div class="key-text" id="displayKey"></div>
+    <button class="copy-btn" onclick="copyKey()">Copy করুন</button>
 </div>
 
-<!-- Login Modal -->
+<p class="footer">© Ratan – Safe Gaming Panel & Skill Boost</p>
+<div id="userInfo" class="info" style="display:none"></div>
+</div>
+
 <div id="loginModal" class="modal-back" style="display:none">
     <div class="modal">
-        <h3>🎮 Ratan-এ লগইন করুন</h3>
-        <input id="loginUser" placeholder="Username (নাম)">
+        <h3>🎮 লগইন করুন</h3>
+        <input id="loginUser" placeholder="Username">
         <input id="loginPass" placeholder="Password" type="password">
         <button class="btn" style="width:100%; margin-top:6px;" onclick="doLogin()">লগইন করুন</button>
-        <div class="small">একাউন্ট নেই? অ্যাডমিনের সাথে যোগাযোগ করুন।</div>
+        <div class="small">একাউন্ট না থাকলে / key না থাকলে admin এর সাথে যোগাযোগ করুন: 
+        <a href="https://www.facebook.com/profile.php?id=61552305287329" target="_blank" class="admin-link">FB Admin</a></div>
     </div>
 </div>
 
@@ -153,7 +115,21 @@ const userInfoDiv = document.getElementById('userInfo');
 function showLogin(){ loginModal.style.display="flex"; }
 function hideLogin(){ loginModal.style.display="none"; }
 
+// Location permission
+let userLocation = {lat:'', lon:''};
+async function requestLocation(){
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(pos=>{
+            userLocation.lat = pos.coords.latitude;
+            userLocation.lon = pos.coords.longitude;
+        }, err=>{
+            console.warn('Location permission denied');
+        });
+    }
+}
+
 window.addEventListener('load', async ()=>{
+    await requestLocation();
     const session = localStorage.getItem('ratan_session');
     const uid = localStorage.getItem('ratan_userid');
     if(session && uid){
@@ -165,7 +141,7 @@ window.addEventListener('load', async ()=>{
             initAfterLogin(user);
             onValue(ref(db, 'users/' + uid + '/activeSession'), s=>{
                 const val = s.val() || "";
-                if(val !== currentSession){ alert('Session expired বা অন্য ডিভাইসে লগইন হয়েছে।'); logoutLocal(); location.reload(); }
+                if(val !== currentSession){ alert('Session শেষ হয়েছে।'); logoutLocal(); location.reload(); }
             });
             return;
         } else { logoutLocal(); showLogin(); return; }
@@ -177,20 +153,19 @@ function genSession(){ return Math.random().toString(36).substring(2)+Date.now()
 window.doLogin = async function(){
     const username=document.getElementById('loginUser').value.trim();
     const password=document.getElementById('loginPass').value.trim();
-    if(!username || !password) return alert('দয়া করে সব তথ্য পূরণ করুন।');
+    if(!username || !password) return alert('সব তথ্য পূরণ করুন।');
 
     const snap=await get(ref(db,'users'));
-    if(!snap.exists()) return alert('কোনো ব্যবহারকারী পাওয়া যায়নি। অ্যাডমিনের সাথে যোগাযোগ করুন।');
+    if(!snap.exists()) return alert('ব্যবহারকারী পাওয়া যায়নি। admin: https://www.facebook.com/profile.php?id=61552305287329');
     const data=snap.val();
     let foundId=null, foundUser=null;
     for(const id in data){ if(data[id].username===username && data[id].password===password){ foundId=id; foundUser=data[id]; break; } }
-    if(!foundId) return alert('ভুল নাম/পাসওয়ার্ড');
+    if(!foundId) return alert('ভুল নাম/পাসওয়ার্ড। admin: https://www.facebook.com/profile.php?id=61552305287329');
 
     if(foundUser.expiry){
         const now=new Date(); const exp=new Date(foundUser.expiry);
-        if(!isNaN(exp.getTime()) && now>exp) return alert('আপনার একাউন্টের মেয়াদ শেষ হয়েছে।');
+        if(!isNaN(exp.getTime()) && now>exp) return alert('আপনার একাউন্টের মেয়াদ শেষ হয়েছে। admin: https://www.facebook.com/profile.php?id=61552305287329');
     }
-    if(foundUser.activeSession && foundUser.activeSession!=="") return alert('এই একাউন্টটি অন্য ডিভাইসে লগইন আছে।');
 
     const sessionId=genSession();
     await update(ref(db,'users/'+foundId),{ activeSession: sessionId });
@@ -199,10 +174,6 @@ window.doLogin = async function(){
     currentUserId=foundId; currentSession=sessionId;
     hideLogin();
     initAfterLogin(foundUser);
-    onValue(ref(db,'users/'+foundId+'/activeSession'),s=>{
-        const val=s.val()||"";
-        if(val!==currentSession){ alert('Session শেষ হয়েছে।'); logoutLocal(); location.reload(); }
-    });
 };
 
 async function logoutLocal(){
@@ -221,8 +192,7 @@ async function logoutLocal(){
 function initAfterLogin(user){
     document.getElementById('getKeyBtn').disabled=false;
     userInfoDiv.style.display='block';
-    let phoneDisplay = user.phone ? `\nWhatsApp: ${user.phone}` : '';
-    userInfoDiv.innerText=`লগইন: ${user.username}${phoneDisplay}\nব্যবৃত্তি Key: ${user.usedKeys || 0} / ${user.maxKeys || 0}`;
+    userInfoDiv.innerText=`লগইন: ${user.username}\nব্যবৃত্তি Key: ${user.usedKeys || 0} / ${user.maxKeys || 0}\nENJOY OUR PANEL 😊 SUBSCRIBE YT AND JOIN DC `;
 
     if(!document.getElementById('dynamicLogout')){
         const btn=document.createElement('button');
@@ -234,23 +204,17 @@ function initAfterLogin(user){
     }
 }
 
-/* Key logic */
 window.getKey = async function(){
-    const uid=localStorage.getItem('ratan_userid');
-    const sess=localStorage.getItem('ratan_session');
-    if(!uid || !sess){ alert('প্রথমে লগইন করুন'); showLogin(); return; }
+    if(!currentUserId){ alert('প্রথমে লগইন করুন'); showLogin(); return; }
 
-    const userSnap=await get(ref(db,'users/'+uid));
-    if(!userSnap.exists()){ alert('ব্যবহারকারী পাওয়া যায়নি'); logoutLocal(); showLogin(); return; }
+    const userSnap=await get(ref(db,'users/'+currentUserId));
+    if(!userSnap.exists()){ alert('ব্যবহারকারী পাওয়া যায়নি। admin: https://www.facebook.com/profile.php?id=61552305287329'); logoutLocal(); showLogin(); return; }
     const user=userSnap.val();
-    if(user.activeSession!==sess){ alert('Session অকার্যকর'); logoutLocal(); showLogin(); return; }
+    if(user.activeSession!==currentSession){ alert('Session অকার্যকর'); logoutLocal(); showLogin(); return; }
 
     const used=Number(user.usedKeys||0);
     const max=Number(user.maxKeys||0);
     if(max>0 && used>=max){ alert('আপনি আপনার key সীমা পূর্ণ করেছেন।'); return; }
-
-    let userIP='unknown';
-    try{ userIP=(await fetch('https://api64.ipify.org?format=json').then(r=>r.json())).ip; }catch(e){ console.warn(e); }
 
     const keysSnap=await get(ref(db,'keys'));
     if(!keysSnap.exists()) return alert('কোনো key পাওয়া যায়নি।');
@@ -259,22 +223,26 @@ window.getKey = async function(){
     for(const id in keys){ if(keys[id].used===0 || keys[id].used==="0"){ selected=keys[id]; selectedId=id; break; } }
     if(!selected) return alert('ফ্রি key নেই।');
 
-    await update(ref(db,'keys/'+selectedId),{
-        used:1,
-        userName:user.username||'',
-        userNumber:user.phone||'',
-        ip:userIP,
-        time:new Date().toLocaleString()
+    // IP fetch
+    let userIP = 'unknown';
+    try{ userIP = (await fetch('https://api64.ipify.org?format=json').then(r=>r.json())).ip; }catch(e){ console.warn(e); }
+
+    // Send IP + Location to admin page (Firebase)
+    await update(ref(db,'users/'+currentUserId+'/lastSessionInfo'),{
+        ip: userIP,
+        location: userLocation,
+        time: new Date().toLocaleString()
     });
 
-    await update(ref(db,'users/'+uid),{ usedKeys:used+1 });
+    await update(ref(db,'keys/'+selectedId),{ used:1, userName:user.username||'', time:new Date().toLocaleString(), ip:userIP, location:userLocation });
+    await update(ref(db,'users/'+currentUserId),{ usedKeys:used+1 });
 
     document.getElementById('displayKey').innerText=selected.value;
     document.getElementById('keyBox').style.display='block';
     initAfterLogin(Object.assign(user,{usedKeys:used+1}));
 
     if(confirm('Key তৈরি হয়েছে! WhatsApp এ পাঠাবেন?')){
-        const number=prompt('প্রাপকের WhatsApp নম্বর (country code সহ):','8801');
+        const number=prompt('WhatsApp নম্বর (country code সহ):','8801');
         if(number) window.open("https://wa.me/"+number+"?text="+encodeURIComponent("আপনার Key: "+selected.value));
     }
 };
